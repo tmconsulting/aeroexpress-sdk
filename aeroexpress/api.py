@@ -2,7 +2,7 @@ from aeroexpress import utils
 from .session import Session
 from datetime import datetime
 from .wrapper.types import Lang
-from .wrapper import Version, FreeSeats2
+from .wrapper import Version, FreeSeats2, OrderContacts
 
 
 class API(object):
@@ -17,3 +17,9 @@ class API(object):
         response = self.__session.make_api_request('getFreeSeats2', menuId=menu_id, date=utils.set_datetime(date),
                                                    Guid=guid)
         return FreeSeats2(response)
+
+    def set_order_contacts(self, order_id: int, language: Lang, email: str=None, phone: str=None):
+        response = self.__session.make_api_request('setOrderContacts', orderId=order_id, language=language,
+                                                   email=email, phone=phone)
+        # test server
+        return OrderContacts(response)

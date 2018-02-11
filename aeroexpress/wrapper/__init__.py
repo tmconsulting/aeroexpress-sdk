@@ -31,3 +31,9 @@ class FreeSeats2(Wrapper):
         super(FreeSeats2, self).__init__(json)
         self.__json = json
         self.trips = utils.get_array(json.get('trips'), Trip)
+
+
+class OrderContacts(Wrapper):
+    def __init__(self, json):
+        super(OrderContacts, self).__init__(json)
+        self.__json = json

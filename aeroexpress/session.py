@@ -20,7 +20,7 @@ class Session(object):
             response = self.__send_api_request(method, **data)
             response = response.__json__()
         except:
-            # need test server
+            # test server
             logger.exception('make_api_request')
             return {}
         self.last_response_data = response

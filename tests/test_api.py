@@ -53,3 +53,8 @@ class TestAPI(unittest.TestCase):
         self.assertEqual(trips.trips[0].date, self.datetime)
         self.assertEqual(trips.trips[0].seats, 20)
         self.assertEqual(trips.trips[0].sched_id, 123)
+
+    def test_set_order_contacts(self):
+        order_contacts = self.api.set_order_contacts(1, Lang.RUSSIAN, 'tt@tt.tt')
+
+        self.assertEqual(order_contacts.json, {})
