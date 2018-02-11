@@ -58,3 +58,24 @@ class TestAPI(unittest.TestCase):
         order_contacts = self.api.set_order_contacts(1, Lang.RUSSIAN, 'tt@tt.tt')
 
         self.assertEqual(order_contacts.json, {})
+
+    def test_www_menu(self):
+        www_menu = self.api.get_www_menu(1, Lang.RUSSIAN)
+
+        self.assertEqual(www_menu.items[0].id, 1)
+        self.assertEqual(www_menu.items[0].name, 'name')
+        self.assertEqual(www_menu.items[0].last_id, False)
+        self.assertEqual(www_menu.items[0].price, 1)
+        self.assertEqual(www_menu.items[0].order_type, 1)
+        self.assertEqual(www_menu.items[0].max_tickets, 1)
+        self.assertEqual(www_menu.items[0].max_days, 1)
+        self.assertEqual(www_menu.items[0].description, 'description')
+
+        self.assertEqual(www_menu.items[0].items[0].id, 2)
+        self.assertEqual(www_menu.items[0].items[0].name, 'name2')
+        self.assertEqual(www_menu.items[0].items[0].last_id, True)
+        self.assertEqual(www_menu.items[0].items[0].price, 2)
+        self.assertEqual(www_menu.items[0].items[0].order_type, 2)
+        self.assertEqual(www_menu.items[0].items[0].max_tickets, 2)
+        self.assertEqual(www_menu.items[0].items[0].max_days, 2)
+        self.assertEqual(www_menu.items[0].items[0].description, 'description2')

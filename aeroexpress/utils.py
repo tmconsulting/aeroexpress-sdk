@@ -19,9 +19,9 @@ def get_datetime(item):
     return None
 
 
-def get_datetime_array(items):
-    if items is not None:
-        return [datetime.strptime(item, '%Y-%m-%dT%X') for item in items]
+def get_bool(item):
+    if item is not None:
+        return item # test server
     return None
 
 
