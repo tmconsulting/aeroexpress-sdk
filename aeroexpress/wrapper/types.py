@@ -1,3 +1,3 @@
-class LANG:
+class Lang:
     RUSSIAN = 'ru'
     ENGLISH = 'en'

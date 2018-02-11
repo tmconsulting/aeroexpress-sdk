@@ -1,8 +1,9 @@
 import json
 import mock
 import unittest
-
 from aeroexpress import API
+from datetime import datetime
+from aeroexpress.wrapper.types import Lang
 
 
 class JsonLoader(object):
@@ -36,6 +37,7 @@ class TestAPI(unittest.TestCase):
     def setUp(self):
         self.maxDiff = None
         self.api = API('url')
+        self.datetime = datetime.fromtimestamp(0).replace(hour=3)
 
     @mock.patch('zeep.Client', MockRequest)
     def test_get_version(self):
@@ -43,3 +45,11 @@ class TestAPI(unittest.TestCase):
 
         self.assertEqual(version.version, 12)
         self.assertEqual(version.features, 'core agent-core schedule3')
+
+    def test_get_free_seats_2(self):
+        trips = self.api.get_free_seats_2(0, self.datetime, Lang.RUSSIAN)
+
+        self.assertEqual(trips.trips[0].trip, "00:00-00:30")
+        self.assertEqual(trips.trips[0].date, self.datetime)
+        self.assertEqual(trips.trips[0].seats, 20)
+        self.assertEqual(trips.trips[0].sched_id, 123)
