@@ -79,3 +79,12 @@ class TestAPI(unittest.TestCase):
         self.assertEqual(www_menu.items[0].items[0].max_tickets, 2)
         self.assertEqual(www_menu.items[0].items[0].max_days, 2)
         self.assertEqual(www_menu.items[0].items[0].description, 'description2')
+
+    def test_request_tickets_2(self):
+        request_tickets = self.api.request_tickets_2(1, self.datetime, 1)
+
+        self.assertEqual(request_tickets.order_id, 1)
+        self.assertEqual(request_tickets.sum, 1)
+        self.assertEqual(request_tickets.details, 'details')
+        self.assertEqual(request_tickets.hash, 'hash')
+        self.assertEqual(request_tickets.status_url, 'status_url')

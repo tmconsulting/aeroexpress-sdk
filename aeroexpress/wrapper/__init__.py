@@ -62,3 +62,13 @@ class WwwMenu(Wrapper):
         super(WwwMenu, self).__init__(json)
         self.items = utils.get_array(json.get('item'), WwwMenuItem)
 
+
+class RequestTickets2(Wrapper):
+    def __init__(self, json):
+        super(RequestTickets2, self).__init__(json)
+
+        self.order_id = json.get('orderId')
+        self.sum = json.get('Sum')
+        self.details = json.get('Details')
+        self.hash = json.get('Hash')
+        self.status_url = json.get('statusUrl')

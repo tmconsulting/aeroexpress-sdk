@@ -2,7 +2,7 @@ from aeroexpress import utils
 from .session import Session
 from datetime import datetime
 from .wrapper.types import Lang
-from .wrapper import Version, FreeSeats2, OrderContacts, WwwMenu
+from .wrapper import Version, FreeSeats2, OrderContacts, WwwMenu, RequestTickets2
 
 
 class API(object):
@@ -27,3 +27,9 @@ class API(object):
     def get_www_menu(self, menu_id: int, language: Lang, guid: str=None):
         response = self.__session.make_api_request('getWwwMenu', menuId=menu_id, Guid=guid, language=language)
         return WwwMenu(response)
+
+    def request_tickets_2(self, menu_id: int, departure_date: datetime, order_type: int, guid: str=None):
+        response = self.__session.make_api_request('requestTickets2', menuId=menu_id,
+                                                   departDate=utils.set_datetime(departure_date),
+                                                   Guid=guid, orderType=order_type)
+        return RequestTickets2(response)
