@@ -2,7 +2,9 @@ from aeroexpress import utils
 from .session import Session
 from datetime import datetime
 from .wrapper.types import Lang
-from .wrapper import Version, FreeSeats2, OrderContacts, WwwMenu, RequestTickets2, PayOrder, CancelOrder, Schedule
+from .wrapper.request import PersonalInfoWrapper
+from .wrapper import (Version, FreeSeats2, OrderContacts, WwwMenu, RequestTickets2, RequestTickets3, PayOrder,
+                      CancelOrder, Schedule)
 
 
 class API(object):
@@ -33,6 +35,13 @@ class API(object):
                                                    departDate=utils.set_datetime(departure_date),
                                                    Guid=guid, orderType=order_type)
         return RequestTickets2(response)
+
+    # request item ?
+    def request_tickets_3(self, personal_info: 'list of PersonalInfo', request, email: str=None, mobile: str=None):
+        response = self.__session.make_api_request('requestTickets3', templateId=None, request=request,
+                                                   personalInfoWrapper=PersonalInfoWrapper(personal_info).request,
+                                                   email=email, mobile=mobile)
+        return RequestTickets3(response)
 
     def pay_order(self, order_id: int, language: Lang=Lang.RUSSIAN):
         response = self.__session.make_api_request('payOrder', OrderId=order_id, language=language)

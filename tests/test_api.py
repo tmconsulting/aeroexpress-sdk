@@ -4,6 +4,7 @@ import unittest
 from aeroexpress import API
 from datetime import datetime
 from aeroexpress.wrapper.types import Lang, Day
+from aeroexpress.wrapper.request import PersonalInfo
 
 
 class JsonLoader(object):
@@ -130,3 +131,8 @@ class TestAPI(unittest.TestCase):
         self.assertEqual(schedule.items[0].stop_station, 1)
         self.assertEqual(schedule.items[0].stop_arrival, '00:00')
         self.assertEqual(schedule.items[0].stop_departure, '00:00')
+
+    def test_request_tickets_3(self):
+        request_tickets = self.api.request_tickets_3([PersonalInfo('', '', '', '', '')], None)
+
+        self.assertEqual(request_tickets.json, {})

@@ -179,3 +179,8 @@ class Schedule(Wrapper):
         super(Schedule, self).__init__(json)
 
         self.items = utils.get_array(json.get('item'), ScheduleItem)
+
+
+class RequestTickets3(Wrapper):
+    def __init__(self, json):
+        super(RequestTickets3, self).__init__(json)
