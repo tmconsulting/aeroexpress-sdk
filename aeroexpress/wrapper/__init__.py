@@ -72,3 +72,20 @@ class RequestTickets2(Wrapper):
         self.details = json.get('Details')
         self.hash = json.get('Hash')
         self.status_url = json.get('statusUrl')
+
+
+class PayOrder(Wrapper):
+    def __init__(self, json):
+        super(PayOrder, self).__init__(json)
+
+        self.code = json.get('Code')
+        self.ticket_id = json.get('ticketId')
+        self.ticket_guid = json.get('ticketGuid')
+        self.ticket_url = json.get('ticketUrl')
+        self.token = json.get('Token')
+        self.trip_date = utils.get_datetime(json.get('tripDate'))
+        self.trip_time = json.get('tripTime')
+        self.st_arrival = json.get('stArrival')
+        self.st_depart = json.get('stDepart')
+        self.tariff = json.get('Tariff')
+        self.ticket_price = json.get('ticketPrice')

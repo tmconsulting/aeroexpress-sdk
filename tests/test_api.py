@@ -88,3 +88,18 @@ class TestAPI(unittest.TestCase):
         self.assertEqual(request_tickets.details, 'details')
         self.assertEqual(request_tickets.hash, 'hash')
         self.assertEqual(request_tickets.status_url, 'status_url')
+
+    def test_pay_order(self):
+        pay_order = self.api.pay_order(1)
+
+        self.assertEqual(pay_order.code, "code")
+        self.assertEqual(pay_order.ticket_id, 1)
+        self.assertEqual(pay_order.ticket_guid, "ticket_guid")
+        self.assertEqual(pay_order.ticket_url, "ticket_url")
+        self.assertEqual(pay_order.token, "token")
+        self.assertEqual(pay_order.trip_date, self.datetime)
+        self.assertEqual(pay_order.trip_time, "00:00")
+        self.assertEqual(pay_order.st_arrival, "st_arrival")
+        self.assertEqual(pay_order.st_depart, "st_depart")
+        self.assertEqual(pay_order.tariff, "tariff")
+        self.assertEqual(pay_order.ticket_price, "ticket_price")
