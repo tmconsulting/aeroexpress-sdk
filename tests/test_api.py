@@ -161,3 +161,8 @@ class TestAPI(unittest.TestCase):
         self.assertEqual(document_types.documents[0].doc_type_id, 'RUSSIAN PASSPORT')
         self.assertEqual(document_types.documents[0].doc_type_name, 'Russian passport')
         self.assertEqual(document_types.documents[0].input_mask, '(\\w)(\\w{3})(\\d{1,16})')
+
+    def test_get_order_history(self):
+        order_history = self.api.get_order_history(1)
+
+        self.assertEqual(order_history.json, {})

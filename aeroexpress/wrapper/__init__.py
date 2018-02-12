@@ -228,3 +228,7 @@ class DocumentTypeResponse(Wrapper):
 
         self.documents = [] if type(json.get('documentTypes')) is not dict else utils.get_array(json['documentTypes'].get('documentType'), DocumentType)
 
+
+class OrderHistory(Wrapper):
+    def __init__(self, json):
+        super(OrderHistory, self).__init__(json)
