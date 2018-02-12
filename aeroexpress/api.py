@@ -2,7 +2,7 @@ from aeroexpress import utils
 from .session import Session
 from datetime import datetime
 from .wrapper.types import Lang
-from .wrapper import Version, FreeSeats2, OrderContacts, WwwMenu, RequestTickets2, PayOrder, CancelOrder
+from .wrapper import Version, FreeSeats2, OrderContacts, WwwMenu, RequestTickets2, PayOrder, CancelOrder, Schedule
 
 
 class API(object):
@@ -41,3 +41,8 @@ class API(object):
     def cancel_order(self, order_id: int):
         response = self.__session.make_api_request('cancelOrder', OrderId=order_id)
         return CancelOrder(response)
+
+    def get_schedule_4(self, date: datetime=None, with_changes: bool=False, language: Lang=Lang.RUSSIAN):
+        response = self.__session.make_api_request('getSchedule4', withChanges=with_changes, language=language,
+                                                   date=utils.set_datetime(date))
+        return Schedule(response)

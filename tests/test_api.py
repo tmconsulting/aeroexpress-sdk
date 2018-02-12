@@ -3,7 +3,7 @@ import mock
 import unittest
 from aeroexpress import API
 from datetime import datetime
-from aeroexpress.wrapper.types import Lang
+from aeroexpress.wrapper.types import Lang, Day
 
 
 class JsonLoader(object):
@@ -108,3 +108,25 @@ class TestAPI(unittest.TestCase):
         cancel_order = self.api.cancel_order(1)
 
         self.assertEqual(cancel_order.json, {})
+
+    def test_get_schedule_4(self):
+        schedule = self.api.get_schedule_4()
+
+        self.assertEqual(schedule.items[0].branch_id, 1)
+        self.assertEqual(schedule.items[0].branch_name, 'branch_name')
+        self.assertEqual(schedule.items[0].branch_city, 'branch_city')
+        self.assertEqual(schedule.items[0].branch_stations, 'branch_stations')
+        self.assertEqual(schedule.items[0].station_id, 1)
+        self.assertEqual(schedule.items[0].station_name, 'station_name')
+        self.assertEqual(schedule.items[0].route, 'route')
+        self.assertEqual(schedule.items[0].route_first_station, 'first_station')
+        self.assertEqual(schedule.items[0].route_last_station, 'last_station')
+        self.assertEqual(schedule.items[0].train, None)
+        self.assertEqual(schedule.items[0].train_num, 1)
+        self.assertEqual(schedule.items[0].train_description, 'train_description')
+        self.assertEqual(schedule.items[0].train_day_num, Day.EVEN)
+        self.assertEqual(schedule.items[0].train_week_days, None)
+        self.assertEqual(schedule.items[0].train_stop, None)
+        self.assertEqual(schedule.items[0].stop_station, 1)
+        self.assertEqual(schedule.items[0].stop_arrival, '00:00')
+        self.assertEqual(schedule.items[0].stop_departure, '00:00')

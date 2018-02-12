@@ -101,3 +101,81 @@ class PayOrder(Wrapper):
 class CancelOrder(Wrapper):
     def __init__(self, json):
         super(CancelOrder, self).__init__(json)
+
+
+class ScheduleBranch(Wrapper):
+    def __init__(self, json):
+        super(ScheduleBranch, self).__init__(json)
+
+        self.id = json.get('branch.id"')
+        self.name = json.get('branch.name')
+        self.city = json.get('branch.city')
+        self.stations = json.get('branch.stations')
+
+
+class ScheduleStation(Wrapper):
+    def __init__(self, json):
+        super(ScheduleStation, self).__init__(json)
+
+        self.id = json.get('station.stationId')
+        self.name = json.get('station.stationName')
+
+
+class ScheduleRoute(Wrapper):
+    def __init__(self, json):
+        super(ScheduleRoute, self).__init__(json)
+
+        self.route = json.get('route')
+        self.first_station = json.get('route.firstStation')
+        self.last_station = json.get('route.lastStation')
+
+
+class ScheduleTrain(Wrapper):
+    def __init__(self, json):
+        super(ScheduleTrain, self).__init__(json)
+
+        self.train = json.get('train')
+        self.num = json.get('train.num')
+        self.description = json.get('train.description')
+        self.day_num = json.get('train.dayNum')
+        self.week_days = json.get('train.weekDays')
+        self.stop = json.get('train.stop')
+
+
+class ScheduleStop(Wrapper):
+    def __init__(self, json):
+        super(ScheduleStop, self).__init__(json)
+
+        self.arrival = json.get('stop.arrival')
+        self.departure = json.get('stop.departure')
+
+
+class ScheduleItem(Wrapper):
+    def __init__(self, json):
+        super(ScheduleItem, self).__init__(json)
+
+        self.branch_id = json.get('branch.id')
+        self.branch_name = json.get('branch.name')
+        self.branch_city = json.get('branch.city')
+        self.branch_stations = json.get('branch.stations')
+        self.station_id = json.get('station.stationId')
+        self.station_name = json.get('station.stationName')
+        self.route = json.get('route')
+        self.route_first_station = json.get('route.firstStation')
+        self.route_last_station = json.get('route.lastStation')
+        self.train = json.get('train')
+        self.train_num = json.get('train.num')
+        self.train_description = json.get('train.description')
+        self.train_day_num = json.get('train.dayNum')
+        self.train_week_days = json.get('train.weekDays')
+        self.train_stop = json.get('train.stop')
+        self.stop_station = json.get('stop.station')
+        self.stop_arrival = json.get('stop.arrival')
+        self.stop_departure = json.get('stop.departure')
+
+
+class Schedule(Wrapper):
+    def __init__(self, json):
+        super(Schedule, self).__init__(json)
+
+        self.items = utils.get_array(json.get('item'), ScheduleItem)

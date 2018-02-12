@@ -1,0 +1,21 @@
+{
+  "item": [
+    {
+      "branch.id": 1,
+      "branch.name": "branch_name",
+      "branch.city": "branch_city",
+      "branch.stations": "branch_stations",
+      "station.stationId": 1,
+      "station.stationName": "station_name",
+      "route": "route",
+      "route.firstStation": "first_station",
+      "route.lastStation": "last_station",
+      "train.num": 1,
+      "train.description": "train_description",
+      "train.dayNum": "EVEN",
+      "stop.station": 1,
+      "stop.arrival": "00:00",
+      "stop.departure": "00:00"
+    }
+  ]
+}
