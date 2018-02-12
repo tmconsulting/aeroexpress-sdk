@@ -74,9 +74,9 @@ class RequestTickets2(Wrapper):
         self.status_url = json.get('statusUrl')
 
 
-class PayOrder(Wrapper):
+class PayOrderItem(Wrapper):
     def __init__(self, json):
-        super(PayOrder, self).__init__(json)
+        super(PayOrderItem, self).__init__(json)
 
         self.code = json.get('Code')
         self.ticket_id = json.get('ticketId')
@@ -89,3 +89,15 @@ class PayOrder(Wrapper):
         self.st_depart = json.get('stDepart')
         self.tariff = json.get('Tariff')
         self.ticket_price = json.get('ticketPrice')
+
+
+class PayOrder(Wrapper):
+    def __init__(self, json):
+        super(PayOrder, self).__init__(json)
+
+        self.items = utils.get_array(json.get('item'), PayOrderItem)
+
+
+class CancelOrder(Wrapper):
+    def __init__(self, json):
+        super(CancelOrder, self).__init__(json)

@@ -92,14 +92,19 @@ class TestAPI(unittest.TestCase):
     def test_pay_order(self):
         pay_order = self.api.pay_order(1)
 
-        self.assertEqual(pay_order.code, "code")
-        self.assertEqual(pay_order.ticket_id, 1)
-        self.assertEqual(pay_order.ticket_guid, "ticket_guid")
-        self.assertEqual(pay_order.ticket_url, "ticket_url")
-        self.assertEqual(pay_order.token, "token")
-        self.assertEqual(pay_order.trip_date, self.datetime)
-        self.assertEqual(pay_order.trip_time, "00:00")
-        self.assertEqual(pay_order.st_arrival, "st_arrival")
-        self.assertEqual(pay_order.st_depart, "st_depart")
-        self.assertEqual(pay_order.tariff, "tariff")
-        self.assertEqual(pay_order.ticket_price, "ticket_price")
+        self.assertEqual(pay_order.items[0].code, "code")
+        self.assertEqual(pay_order.items[0].ticket_id, 1)
+        self.assertEqual(pay_order.items[0].ticket_guid, "ticket_guid")
+        self.assertEqual(pay_order.items[0].ticket_url, "ticket_url")
+        self.assertEqual(pay_order.items[0].token, "token")
+        self.assertEqual(pay_order.items[0].trip_date, self.datetime)
+        self.assertEqual(pay_order.items[0].trip_time, "00:00")
+        self.assertEqual(pay_order.items[0].st_arrival, "st_arrival")
+        self.assertEqual(pay_order.items[0].st_depart, "st_depart")
+        self.assertEqual(pay_order.items[0].tariff, "tariff")
+        self.assertEqual(pay_order.items[0].ticket_price, "ticket_price")
+
+    def test_cancel_order(self):
+        cancel_order = self.api.cancel_order(1)
+
+        self.assertEqual(cancel_order.json, {})
