@@ -4,7 +4,7 @@ from datetime import datetime
 from .wrapper.types import Lang
 from .wrapper.request import PersonalInfoWrapper
 from .wrapper import (Version, FreeSeats2, OrderContacts, WwwMenu, RequestTickets2, RequestTickets3, PayOrder,
-                      CancelOrder, Schedule)
+                      CancelOrder, Schedule, OrderTickets)
 
 
 class API(object):
@@ -55,3 +55,8 @@ class API(object):
         response = self.__session.make_api_request('getSchedule4', withChanges=with_changes, language=language,
                                                    date=utils.set_datetime(date))
         return Schedule(response)
+
+    def get_order_tickets(self, order_id: int, language: Lang=Lang.RUSSIAN):
+        response = self.__session.make_api_request('getOrderTickets', orderId=order_id, language=language, login=None,
+                                                   password=None)
+        return OrderTickets(response)

@@ -184,3 +184,30 @@ class Schedule(Wrapper):
 class RequestTickets3(Wrapper):
     def __init__(self, json):
         super(RequestTickets3, self).__init__(json)
+
+
+class OrderTicket(Wrapper):
+    def __init__(self, json):
+        super(OrderTicket, self).__init__(json)
+
+        self.ticket_id = json.get('ticketId')
+        self.st_depart = json.get('stDepart')
+        self.st_arrival = json.get('stArrival')
+        self.tariff = json.get('tariff')
+        self.trip_date = utils.get_datetime(json.get('tripDate'))
+        self.trip_time = json.get('tripTime')
+        self.valid_until = utils.get_datetime(json.get('validUntil'))
+        self.ticket_price = json.get('ticketPrice')
+        self.ticket_url = json.get('ticketUrl')
+        self.first_name = json.get('firstName')
+        self.patronymic_name = json.get('patronymicName')
+        self.surname = json.get('surname')
+        self.doc_type = json.get('docType')
+        self.doc_number = json.get('docNumber')
+
+
+class OrderTickets(Wrapper):
+    def __init__(self, json):
+        super(OrderTickets, self).__init__(json)
+
+        self.tickets = [] if type(json.get('tickets')) is not dict else utils.get_array(json['tickets'].get('ticket'), OrderTicket)

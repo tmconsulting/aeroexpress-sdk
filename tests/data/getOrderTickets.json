@@ -1,0 +1,22 @@
+{
+  "tickets": {
+    "ticket": [
+      {
+        "ticketId": 0,
+        "stDepart": "",
+        "stArrival": "",
+        "tariff": "",
+        "tripDate": "1970-01-01T03:00:00",
+        "tripTime": "00:00",
+        "validUntil": "1970-01-01T03:00:00",
+        "ticketPrice": 400,
+        "ticketUrl": "",
+        "firstName": "first_name",
+        "patronymicName": "patronymic_name",
+        "surname": "surname",
+        "docType": "doc_type",
+        "docNumber": "doc_number"
+      }
+    ]
+  }
+}

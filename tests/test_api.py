@@ -136,3 +136,21 @@ class TestAPI(unittest.TestCase):
         request_tickets = self.api.request_tickets_3([PersonalInfo('', '', '', '', '')], None)
 
         self.assertEqual(request_tickets.json, {})
+
+    def test_get_order_tickets(self):
+        order_tickets = self.api.get_order_tickets(1)
+
+        self.assertEqual(order_tickets.tickets[0].ticket_id, 0)
+        self.assertEqual(order_tickets.tickets[0].st_depart, '')
+        self.assertEqual(order_tickets.tickets[0].st_arrival, '')
+        self.assertEqual(order_tickets.tickets[0].tariff, '')
+        self.assertEqual(order_tickets.tickets[0].trip_date, self.datetime)
+        self.assertEqual(order_tickets.tickets[0].trip_time, '00:00')
+        self.assertEqual(order_tickets.tickets[0].valid_until, self.datetime)
+        self.assertEqual(order_tickets.tickets[0].ticket_price, 400)
+        self.assertEqual(order_tickets.tickets[0].ticket_url, '')
+        self.assertEqual(order_tickets.tickets[0].first_name, 'first_name')
+        self.assertEqual(order_tickets.tickets[0].patronymic_name, 'patronymic_name')
+        self.assertEqual(order_tickets.tickets[0].surname, 'surname')
+        self.assertEqual(order_tickets.tickets[0].doc_type, 'doc_type')
+        self.assertEqual(order_tickets.tickets[0].doc_number, 'doc_number')
