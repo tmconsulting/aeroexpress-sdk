@@ -4,7 +4,7 @@ from datetime import datetime
 from .wrapper.types import Lang
 from .wrapper.request import PersonalInfoWrapper
 from .wrapper import (Version, FreeSeats2, OrderContacts, WwwMenu, RequestTickets2, RequestTickets3, PayOrder,
-                      CancelOrder, Schedule, OrderTickets)
+                      CancelOrder, Schedule, OrderTickets, DocumentTypeResponse)
 
 
 class API(object):
@@ -60,3 +60,7 @@ class API(object):
         response = self.__session.make_api_request('getOrderTickets', orderId=order_id, language=language, login=None,
                                                    password=None)
         return OrderTickets(response)
+
+    def list_personal_info_document_types(self,  language: Lang=Lang.RUSSIAN):
+        response = self.__session.make_api_request('listPersonalInfoDocumentTypes', language=language)
+        return DocumentTypeResponse(response)

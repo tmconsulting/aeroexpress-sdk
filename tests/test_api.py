@@ -154,3 +154,10 @@ class TestAPI(unittest.TestCase):
         self.assertEqual(order_tickets.tickets[0].surname, 'surname')
         self.assertEqual(order_tickets.tickets[0].doc_type, 'doc_type')
         self.assertEqual(order_tickets.tickets[0].doc_number, 'doc_number')
+
+    def test_list_personal_info_document_types(self):
+        document_types = self.api.list_personal_info_document_types()
+
+        self.assertEqual(document_types.documents[0].doc_type_id, 'RUSSIAN PASSPORT')
+        self.assertEqual(document_types.documents[0].doc_type_name, 'Russian passport')
+        self.assertEqual(document_types.documents[0].input_mask, '(\\w)(\\w{3})(\\d{1,16})')

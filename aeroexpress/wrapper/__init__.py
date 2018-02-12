@@ -211,3 +211,20 @@ class OrderTickets(Wrapper):
         super(OrderTickets, self).__init__(json)
 
         self.tickets = [] if type(json.get('tickets')) is not dict else utils.get_array(json['tickets'].get('ticket'), OrderTicket)
+
+
+class DocumentType(Wrapper):
+    def __init__(self, json):
+        super(DocumentType, self).__init__(json)
+
+        self.doc_type_id = json.get('docTypeId')
+        self.doc_type_name = json.get('docTypeName')
+        self.input_mask = json.get('inputMask')
+
+
+class DocumentTypeResponse(Wrapper):
+    def __init__(self, json):
+        super(DocumentTypeResponse, self).__init__(json)
+
+        self.documents = [] if type(json.get('documentTypes')) is not dict else utils.get_array(json['documentTypes'].get('documentType'), DocumentType)
+

@@ -1,0 +1,12 @@
+{
+  "documentTypes":
+  {
+    "documentType": [
+      {
+        "docTypeId": "RUSSIAN PASSPORT",
+        "docTypeName": "Russian passport",
+        "inputMask": "(\\w)(\\w{3})(\\d{1,16})"
+      }
+    ]
+  }
+}
