@@ -8,26 +8,27 @@ from .wrapper import (Version, FreeSeats2, OrderContacts, WwwMenu, RequestTicket
 
 
 class API(object):
-    def __init__(self, url: str, key_file: str=None, cert: str=None, password: str=None):
+    def __init__(self, url: str, lang: Lang=Lang.RUSSIAN, key_file: str=None, cert: str=None, password: str=None):
         self.__session = Session(url, key_file, cert, password)
+        self.lang = lang
 
     def get_version_info(self):
         response = self.__session.make_api_request('getVersionInfo')
         return Version(response)
 
-    def get_free_seats_2(self, menu_id: int, date: datetime, language: Lang=Lang.RUSSIAN, guid: str=None):
+    def get_free_seats_2(self, menu_id: int, date: datetime, guid: str=None):
         response = self.__session.make_api_request('getFreeSeats2', menuId=menu_id, date=utils.set_datetime(date),
-                                                   Guid=guid, language=language)
+                                                   Guid=guid, language=self.lang)
         return FreeSeats2(response)
 
-    def set_order_contacts(self, order_id: int, language: Lang=Lang.RUSSIAN, email: str=None, phone: str=None):
-        response = self.__session.make_api_request('setOrderContacts', orderId=order_id, language=language,
+    def set_order_contacts(self, order_id: int, email: str=None, phone: str=None):
+        response = self.__session.make_api_request('setOrderContacts', orderId=order_id, language=self.lang,
                                                    email=email, phone=phone)
         # test server
         return OrderContacts(response)
 
-    def get_www_menu(self, menu_id: int, language: Lang=Lang.RUSSIAN, guid: str=None):
-        response = self.__session.make_api_request('getWwwMenu', menuId=menu_id, Guid=guid, language=language)
+    def get_www_menu(self, menu_id: int, guid: str=None):
+        response = self.__session.make_api_request('getWwwMenu', menuId=menu_id, Guid=guid, language=self.lang)
         return WwwMenu(response)
 
     def request_tickets_2(self, menu_id: int, departure_date: datetime, order_type: int, guid: str=None):
@@ -43,24 +44,24 @@ class API(object):
                                                    email=email, mobile=mobile)
         return RequestTickets3(response)
 
-    def pay_order(self, order_id: int, language: Lang=Lang.RUSSIAN):
-        response = self.__session.make_api_request('payOrder', OrderId=order_id, language=language)
+    def pay_order(self, order_id: int):
+        response = self.__session.make_api_request('payOrder', OrderId=order_id, language=self.lang)
         return PayOrder(response)
 
     def cancel_order(self, order_id: int):
         response = self.__session.make_api_request('cancelOrder', OrderId=order_id)
         return CancelOrder(response)
 
-    def get_schedule_4(self, date: datetime=None, with_changes: bool=False, language: Lang=Lang.RUSSIAN):
-        response = self.__session.make_api_request('getSchedule4', withChanges=with_changes, language=language,
+    def get_schedule_4(self, date: datetime=None, with_changes: bool=False):
+        response = self.__session.make_api_request('getSchedule4', withChanges=with_changes, language=self.lang,
                                                    date=utils.set_datetime(date))
         return Schedule(response)
 
-    def get_order_tickets(self, order_id: int, language: Lang=Lang.RUSSIAN):
-        response = self.__session.make_api_request('getOrderTickets', orderId=order_id, language=language, login=None,
+    def get_order_tickets(self, order_id: int):
+        response = self.__session.make_api_request('getOrderTickets', orderId=order_id, language=self.lang, login=None,
                                                    password=None)
         return OrderTickets(response)
 
-    def list_personal_info_document_types(self,  language: Lang=Lang.RUSSIAN):
-        response = self.__session.make_api_request('listPersonalInfoDocumentTypes', language=language)
+    def list_personal_info_document_types(self):
+        response = self.__session.make_api_request('listPersonalInfoDocumentTypes', language=self.lang)
         return DocumentTypeResponse(response)
