@@ -28,7 +28,7 @@ class MockService(object):
 
 
 class MockRequest(object):
-    def __init__(self, param1, param2):
+    def __init__(self, param1, param2, param3):
         self.service = MockService()
 
 
