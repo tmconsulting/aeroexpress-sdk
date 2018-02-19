@@ -1,6 +1,8 @@
 import zeep
 import logging
+import requests
 from zeep.wsse import Signature
+from zeep.transports import Transport
 
 logger = logging.getLogger('Session')
 
@@ -12,8 +14,14 @@ class Session(object):
         self.last_request_data = None
 
         self.url = url
+
+        self.session = requests.Session()
+        self.session.cert = (cert, key_file)
+        self.session.verify = False
+
+        self.transport = Transport(session=self.session)
         self.wsse = Signature(key_file, cert, password) if key_file is not None else None
-        self.client = zeep.Client(self.url, self.wsse)
+        self.client = zeep.Client(self.url, self.wsse, self.transport)
 
     def make_api_request(self, method, **data):
         try:
